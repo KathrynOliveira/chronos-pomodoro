@@ -1,3 +1,16 @@
-export function App(){
-    return <h1>Olá Mundo!</h1>
+import { TimerIcon } from "lucide-react";
+import { Heading } from "./components/Heading";
+import "./styles/global.css";
+
+export function App() {
+  return (
+    <>
+          <Heading>
+              Olá Mundo!
+              <button>
+                <TimerIcon/>
+              </button>
+          </Heading>
+    </>
+  );
 }
