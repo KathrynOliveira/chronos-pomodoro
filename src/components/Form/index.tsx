@@ -6,7 +6,7 @@ export function Form(){
         <div>
             <form className={styles.form} action="">
                 <div className={styles.formRow}>
-                    <Input id="input" type="text"/>
+                    <Input label="Task" id="input" type="text"/>
                 </div>
 
                 <div className={styles.formRow}>
