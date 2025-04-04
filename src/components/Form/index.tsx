@@ -1,3 +1,4 @@
+import { Input } from '../Input';
 import styles from './styles.module.css';
 
 export function Form(){
@@ -5,8 +6,7 @@ export function Form(){
         <div>
             <form className={styles.form} action="">
                 <div className={styles.formRow}>
-                <label htmlFor="input">task</label>
-                <input id="input" type="text"></input>
+                    <Input id="input" type="text"/>
                 </div>
 
                 <div className={styles.formRow}>
