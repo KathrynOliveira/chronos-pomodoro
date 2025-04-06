@@ -4,10 +4,13 @@ import {Button} from '../Button';
 import styles from './styles.module.css';
 import { PlayCircleIcon } from 'lucide-react';
 
-export function Form(){
+export function Form() {
+    function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) { 
+        event.preventDefault();
+    }
     return(
         <div>
-            <form className={styles.form} action="">
+            <form onSubmit={handleCreateNewTask} className={styles.form} action="">
                 <div className={styles.formRow}>
                     <Input label="Task" id="input" type="text"/>
                 </div>
