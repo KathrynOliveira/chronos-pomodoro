@@ -1,9 +1,8 @@
 import { Input } from '../Input';
 import {Cycles} from '../Cycles';
 import {Button} from '../Button';
-import { PlayCircleIcon } from 'lucide-react';
-
 import styles from './styles.module.css';
+import { PlayCircleIcon } from 'lucide-react';
 
 export function Form(){
     return(
