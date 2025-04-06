@@ -3,8 +3,10 @@ import {Cycles} from '../Cycles';
 import {Button} from '../Button';
 import styles from './styles.module.css';
 import { PlayCircleIcon } from 'lucide-react';
+import { useState } from 'react';
 
 export function Form() {
+    const [taskName, setTaskName] = useState('');
     function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) { 
         event.preventDefault();
     }
@@ -12,7 +14,7 @@ export function Form() {
         <div>
             <form onSubmit={handleCreateNewTask} className={styles.form} action="">
                 <div className={styles.formRow}>
-                    <Input label="Task" id="input" type="text"/>
+                    <Input label="Task" id="input" type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)}/>
                 </div>
 
                 <div className={styles.formRow}>
