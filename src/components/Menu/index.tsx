@@ -1,6 +1,6 @@
 import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from 'lucide-react';
 import styles from './styles.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type TypeThemes = 'dark' | 'light'
 
@@ -9,10 +9,16 @@ export function Menu() {
 
     function handleThemeChange(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
         event.preventDefault(); //Não vai para o link
-        // setTheme(theme === 'dark'? 'light' : 'dark');
-        // document.body.className = theme;
+        setTheme(prevTheme => {// pega o valor anterior
+            const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
+            return nextTheme;
+        } );
     }
-
+    
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]); // Executa apenas quando o valor de theme muda
+    
     return (
         <nav className={styles.menu}>
             <a className={styles.menuLink} href='#' aria-label="Home" title="Home">
