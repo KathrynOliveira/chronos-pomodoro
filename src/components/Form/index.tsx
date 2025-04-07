@@ -7,12 +7,14 @@ import { useState } from 'react';
 import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
 
 export function Form() {
     const { state, setState } = useTaskContext();
     const [taskName, setTaskName] = useState('');
 
-    const nextCycle = getNextCycle(state.currentCycle)
+    const nextCycle = getNextCycle(state.currentCycle);
+    const nextCycleType = getNextCycleType(nextCycle);
 
     function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) { 
         event.preventDefault();
