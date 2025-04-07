@@ -8,6 +8,7 @@ import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 export function Form() {
     const { state, setState } = useTaskContext();
@@ -33,8 +34,8 @@ export function Form() {
             startDate: Date.now(),
             completeDate: null,
             interruptDate: null,
-            duration: 1,
-            type: "workTime",
+            duration: state.config[nextCycleType],
+            type: nextCycleType,
         }
 
         const secondsRemaining = newTask.duration * 60
@@ -45,7 +46,7 @@ export function Form() {
                 activeTask: newTask,
                 currentCycle: nextCycle,
                 secondsRemaining,
-                formattedSecondsRemaining: '00:00',
+                formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
                 task: [...prevState.tasks, newTask],
                 config: {...prevState.config},
             }
@@ -63,9 +64,11 @@ export function Form() {
                 <p>Nesse ciclo descanse por 5 min.</p>
                 </div>
 
-                <div className={styles.formRow}>
-                    <Cycles/>
-                </div>
+                {state.currentCycle > 0 && (
+                    <div className={styles.formRow}>
+                        <Cycles/>
+                    </div>
+                )}
 
                 <div className={styles.formRow}>
                     <Button icon={<PlayCircleIcon />}/>
