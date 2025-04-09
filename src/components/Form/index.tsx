@@ -2,7 +2,7 @@ import { Input } from '../Input';
 import {Cycles} from '../Cycles';
 import {Button} from '../Button';
 import styles from './styles.module.css';
-import { PlayCircleIcon } from 'lucide-react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { useState } from 'react';
 import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
@@ -71,7 +71,11 @@ export function Form() {
                 )}
 
                 <div className={styles.formRow}>
-                    <Button type='submit' icon={<PlayCircleIcon />}/>
+                    {!state.activeTask ? (
+                        <Button type='submit' aria-label='Iniciar nova tarefa' title="Iniciar nova tarefa" icon={<PlayCircleIcon />}/>
+                    ) : (
+                         <Button type='button' color="red" aria-label='Interromper tarefa atual' title="Interromper tarefa atual" icon={<StopCircleIcon />}/>    
+                    )}
                 </div>
             </form>
         </div>
