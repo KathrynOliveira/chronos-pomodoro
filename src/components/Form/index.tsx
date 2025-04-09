@@ -57,7 +57,7 @@ export function Form() {
         <div>
             <form onSubmit={handleCreateNewTask} className={styles.form} action="">
                 <div className={styles.formRow}>
-                    <Input label="Task" id="input" type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)}/>
+                    <Input label="Task" id="input" type="text"  disabled={!!state.activeTask} value={taskName} onChange={(e) => setTaskName(e.target.value)}/>
                 </div>
 
                 <div className={styles.formRow}>
@@ -71,7 +71,7 @@ export function Form() {
                 )}
 
                 <div className={styles.formRow}>
-                    <Button icon={<PlayCircleIcon />}/>
+                    <Button type='submit' icon={<PlayCircleIcon />}/>
                 </div>
             </form>
         </div>
