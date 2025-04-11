@@ -7,14 +7,13 @@ export enum TaskActionTypes {
 }
 
 export type TaskActionModel =
-    |{
-        type: TaskActionTypes.START_TASK;
-        playload: TaskModel;
+  | {
+      type: TaskActionTypes.START_TASK;
+      payload: TaskModel;
     }
-    |{
-        type: TaskActionTypes.INTERRUPT_TASK;
-        playload: TaskModel;
+  | {
+      type: TaskActionTypes.INTERRUPT_TASK;
     }
-    | {
-        TYPE: TaskActionTypes.RESET_STATE;
-    }
+  | {
+      type: TaskActionTypes.RESET_STATE;
+    };
