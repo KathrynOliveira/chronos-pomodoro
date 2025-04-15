@@ -9,11 +9,13 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
+import { Tips } from '../Tips';
 
 export function Form() {
     const { state, dispatch } = useTaskContext();
     const [taskName, setTaskName] = useState('');
 
+    //ciclos
     const nextCycle = getNextCycle(state.currentCycle);
     const nextCycleType = getNextCycleType(nextCycle);
 
@@ -53,7 +55,7 @@ export function Form() {
                 </div>
 
                 <div className={styles.formRow}>
-                <p>Nesse ciclo descanse por 5 min.</p>
+                   <Tips/>
                 </div>
 
                 {state.currentCycle > 0 && (
