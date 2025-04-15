@@ -3,6 +3,7 @@ import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 
 export function Tips() {
+    
     const { state } = useTaskContext();
     //ciclos
     const nextCycle = getNextCycle(state.currentCycle);
