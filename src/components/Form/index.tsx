@@ -10,6 +10,7 @@ import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 import { Tips } from '../Tips';
+import { showMessage } from '../../adapters/showMessage';
 
 export function Form() {
     const { state, dispatch } = useTaskContext();
@@ -26,7 +27,7 @@ export function Form() {
 
         const task = taskName.trim();
         if (!task) {
-            alert('Por favor, insira um nome para a tarefa.');
+            showMessage.warning('Por favor, insira um nome para a tarefa.');
             return;
         }
 
@@ -40,10 +41,12 @@ export function Form() {
             type: nextCycleType,
         }
 
-        dispatch({type: TaskActionTypes.START_TASK, payload: newTask})
+        dispatch({ type: TaskActionTypes.START_TASK, payload: newTask })
+        showMessage.warning('Tarefa iniciada.');
     }
 
     function handleInterruptTask() {
+        showMessage.error('Tarefa interrompida.');
         dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
     }
 
