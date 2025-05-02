@@ -10,11 +10,13 @@ import styles from "./styles.module.css";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sortTasks, SortTasksOptions } from "../../utils/sortTasks";
+import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 
 export function History() {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
+  const hasTasks = state.tasks.length > 0;
   // const sortedTask = [...state.tasks].sort((a, b) => {
   //   return b.startDate - a.startDate;
   // })
@@ -26,6 +28,17 @@ export function History() {
 
     };
   });
+
+  useEffect(() => {
+     setSortTaskOptions(prevState => ({
+       ...prevState,
+       tasks: sortTasks({
+         tasks: state.tasks,
+         direction: prevState.direction,
+         field: prevState.field,
+       }),
+     }));
+   }, [state.tasks]);
 
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     const newDirection = sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';
@@ -40,20 +53,30 @@ export function History() {
       field,
     });
   };
+
+  function handleResetHistory() {
+    if(!confirm('Tem certeza')) return;
+
+    dispatch({ type: TaskActionTypes.RESET_STATE });
+  };
     
   return (
     <Main>
       <Container>
         <Heading>
           <span> History </span>
-          <span className={styles.buttonContainer}>
-            <Button icon={<TrashIcon />} color="red" arial-label="Apagar histórico" title="Apagar histórico"/>
-          </span>
+          {hasTasks && (
+            <span className={styles.buttonContainer}>
+              <Button icon={<TrashIcon />} color="red" arial-label="Apagar histórico" title="Apagar histórico"
+                onClick={handleResetHistory} />
+            </span>
+          )}
        </Heading>
       </Container>
 
       <Container>
-        <div className={styles.responsiveTable}>
+        {hasTasks && (
+          <div className={styles.responsiveTable}>
            <table>
              <thead>
                <tr>
@@ -99,7 +122,12 @@ export function History() {
                })}
              </tbody>
            </table>
-         </div>
+          </div>
+        )}
+
+        {!hasTasks && (
+          <p style={{ textAlign: 'center'}}>Não possui tarefas criadas.</p>
+        )}
       </Container>
     </Main>
   );
