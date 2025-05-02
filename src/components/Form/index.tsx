@@ -3,7 +3,7 @@ import {Cycles} from '../Cycles';
 import {Button} from '../Button';
 import styles from './styles.module.css';
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
@@ -14,7 +14,8 @@ import { showMessage } from '../../adapters/showMessage';
 
 export function Form() {
     const { state, dispatch } = useTaskContext();
-    const [taskName, setTaskName] = useState('');
+    const taskName = useRef<HTMLInputElement>(null);
+    const lastName = state.tasks[state.tasks.length - 1]?.name || '';
 
     //ciclos
     const nextCycle = getNextCycle(state.currentCycle);
@@ -23,9 +24,9 @@ export function Form() {
     function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) { 
         event.preventDefault();
 
-        if (taskName === null) return;
+        if (taskName.current === null) return;
 
-        const task = taskName.trim();
+        const task = taskName.current.value.trim();
         if (!task) {
             showMessage.warning('Por favor, insira um nome para a tarefa.');
             return;
@@ -54,7 +55,10 @@ export function Form() {
         <div>
             <form onSubmit={handleCreateNewTask} className={styles.form} action="">
                 <div className={styles.formRow}>
-                    <Input label="Task" id="input" type="text"  disabled={!!state.activeTask} value={taskName} onChange={(e) => setTaskName(e.target.value)}/>
+                    <Input label="Task" id="input" type="text"
+                        disabled={!!state.activeTask} ref={taskName}
+                        placeholder='Digite aqui'
+                        defaultValue={lastName} />
                 </div>
 
                 <div className={styles.formRow}>
