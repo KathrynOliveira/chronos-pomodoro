@@ -1,11 +1,11 @@
 import { Container } from '../../components/Container';
  import { GenericHtml } from '../../components/GenericHtml';
  import { Heading } from '../../components/Heading';
- import { MainTemplate } from '../../templates/MainTemplate';
+ import { Main } from '../../templates/Main';
  
 export function NotFound() {
     return (
-        <MainTemplate>
+        <Main>
             <Container>
                 <h1>Página não encontrada</h1>
                 <p>
@@ -39,6 +39,6 @@ export function NotFound() {
                     </p>
                 </GenericHtml>
             </Container>
-        </MainTemplate>
+        </Main>
     );
 }

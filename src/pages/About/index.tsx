@@ -1,11 +1,11 @@
 import { Container } from '../../components/Container';
  import { GenericHtml } from '../../components/GenericHtml';
  import { Heading } from '../../components/Heading';
- import { MainTemplate } from '../../templates/MainTemplate';
+ import { Main } from '../../templates/Main';
  
  export function AboutPomodoro() {
    return (
-     <MainTemplate>
+     <Main>
        <Container>
          <GenericHtml>
            <Heading>A Técnica Pomodoro 🍅</Heading>
@@ -120,6 +120,6 @@ import { Container } from '../../components/Container';
            </p>
          </GenericHtml>
        </Container>
-     </MainTemplate>
+     </Main>
    );
  }
