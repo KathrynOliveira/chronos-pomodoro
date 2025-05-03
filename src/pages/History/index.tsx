@@ -1,7 +1,5 @@
 import { TrashIcon } from "lucide-react";
 import { Container } from "../../components/Container";
-import { CountDown } from "../../components/CountDown";
-import { Form } from "../../components/Form";
 import { Heading } from "../../components/Heading";
 import { Main } from "../../templates/Main";
 import { Button } from "../../components/Button";
