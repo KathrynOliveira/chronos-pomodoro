@@ -12,10 +12,12 @@ import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
 import { useEffect, useState } from "react";
 import { sortTasks, SortTasksOptions } from "../../utils/sortTasks";
+import { showMessage } from '../../adapters/showMessage';
 import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 
 export function History() {
   const { state, dispatch } = useTaskContext();
+    const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   const hasTasks = state.tasks.length > 0;
   // const sortedTask = [...state.tasks].sort((a, b) => {
   //   return b.startDate - a.startDate;
@@ -38,11 +40,12 @@ export function History() {
          field: prevState.field,
        }),
      }));
-   }, [state.tasks]);
-
+  }, [state.tasks]);
+  
+  
   function handleSortTasks({ field }: Pick<SortTasksOptions, 'field'>) {
     const newDirection = sortTasksOptions.direction === 'desc' ? 'asc' : 'desc';
- 
+    
     setSortTaskOptions({
       tasks: sortTasks({
         direction: newDirection,
@@ -53,13 +56,22 @@ export function History() {
       field,
     });
   };
-
+  
   function handleResetHistory() {
-    if(!confirm('Tem certeza')) return;
-
-    dispatch({ type: TaskActionTypes.RESET_STATE });
+    showMessage.dismiss();
+    showMessage.confirm('Tem certeza?', confirmation => {
+      setConfirmClearHistory(confirmation);
+    });
   };
-    
+  
+  useEffect(() => {
+   if (!confirmClearHistory) return;
+
+   setConfirmClearHistory(false);
+
+   dispatch({ type: TaskActionTypes.RESET_STATE });
+  }, [confirmClearHistory, dispatch]);
+  
   return (
     <Main>
       <Container>
