@@ -3,12 +3,12 @@ import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
 import { RouterLink } from '../RouterLink';
 
-type TypeThemes = 'dark' | 'light'
-
+type AvailableThemes = 'dark' | 'light';
 export function Menu() {
-    const [theme, setTheme] = useState<TypeThemes>(() => {
-        const storageTheme = localStorage.getItem('theme');
-        return storageTheme || 'dark'; // Se não existir no local storage, usa o default 'dark'
+    const [theme, setTheme] = useState<AvailableThemes>(() => {
+        const storageTheme =
+      (localStorage.getItem('theme') as AvailableThemes) || 'dark';
+    return storageTheme;
     });
 
     const nextThemeIcon = {
