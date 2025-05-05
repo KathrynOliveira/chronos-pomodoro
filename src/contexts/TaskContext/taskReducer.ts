@@ -14,14 +14,14 @@ export function taskReducer(
       const nextCycle = getNextCycle(state.currentCycle);
       const secondsRemaining = newTask.duration * 60;
 
-       return {
-         ...state,
-         activeTask: newTask,
-         currentCycle: nextCycle,
-         secondsRemaining,
-         formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
-         tasks: [...state.tasks, newTask],
-       };
+      return {
+        ...state,
+        activeTask: newTask,
+        currentCycle: nextCycle,
+        secondsRemaining,
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
+        tasks: [...state.tasks, newTask],
+      };
     }
     case TaskActionTypes.INTERRUPT_TASK: {
       return {
@@ -54,7 +54,7 @@ export function taskReducer(
     }
 
     case TaskActionTypes.RESET_STATE: {
-      return {...initialTaskState};
+      return { ...initialTaskState };
     }
     case TaskActionTypes.COUNT_DOWN: {
       return {
@@ -64,6 +64,9 @@ export function taskReducer(
           action.payload.secondsRemaining
         ),
       };
+    }
+    case TaskActionTypes.CHANGE_SETTINGS: {
+      return { ...state, config: {...action.payload} };
     }
   }
 
