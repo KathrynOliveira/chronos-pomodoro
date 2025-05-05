@@ -16,12 +16,12 @@ export type TaskActionsWithPayload =
       payload: TaskModel;
     }
   | {
-      type: TaskActionTypes.START_TASK;
+      type: TaskActionTypes.COUNT_DOWN;
       payload: TaskModel;
     }
   | {
       type: TaskActionTypes.CHANGE_SETTINGS;
-      payload: TaskStateModel['config'];
+      payload: TaskStateModel["config"];
     };
 
 export type TaskActionsWithoutPayload =
