@@ -7,7 +7,7 @@ export enum TaskActionTypes {
   RESET_STATE = "RESET_STATE",
   COUNT_DOWN = "COUNT_DOWN",
   COMPLETE_TASK = "COMPLETE_TASK",
-  CHANCE_SETTINGS = "CHANCE_SETTINGS",
+  CHANGE_SETTINGS = "CHANGE_SETTINGS",
 }
 
 export type TaskActionsWithPayload =
@@ -20,7 +20,7 @@ export type TaskActionsWithPayload =
       payload: TaskModel;
     }
   | {
-      type: TaskActionTypes.CHANCE_SETTINGS;
+      type: TaskActionTypes.CHANGE_SETTINGS;
       payload: TaskStateModel['config'];
     };
 
